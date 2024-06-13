@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zxx" translate="no">
+
+<head>
+
+    <meta charset=utf-8>
+    <title>Play The Game!</title>
+    <meta name="robots" content="noindex,nofollow">
+    <meta name=viewport content="width=device-width,initial-scale=1">
+
+    <script async src="https://www.googletagmanager.com/gtag/js"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-QPP17CG89L');
+
+    </script>
+
+    <style>
+        
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            margin: 0;
+        }
+
+        @font-face {
+            font-family: frivDevoryFont;
+            src: url(z/assets/fonts/frivFont.woff);
+        }
+
+        body {
+            background: navy;
+            font-family: 'frivDevoryFont', sans-serif; 
+            font-size: 3vw;
+            color: white;
+            overflow: hidden;
+        }
+
+        @media (orientation: portrait) {
+            body {
+                font-size: 6vw;
+            }
+        }
+
+        #backButton {
+            width: 10vmin;
+            height: 10vmin;
+            min-height: 50px;
+            min-width: 50px;
+            top: 0;
+            position: fixed;
+            left: -20vw;
+            z-index: 20;
+            opacity: 0.5;
+            cursor: pointer;
+            transition: 0.5s;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='100' width='100' viewBox='0 0 26.5 26.5'%3E%3Cdefs%3E%3ClinearGradient id='a' y2='274.1' gradientUnits='userSpaceOnUse' x2='-26.2' gradientTransform='translate(32.4 25.6) scale(.91925)' y1='288.4' x1='-11.7'%3E%3Cstop stop-color='%23ff8900' offset='0'/%3E%3Cstop stop-color='%23fcff00' offset='1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0 25.7c12.6.4 26-10 25.7-25.7' fill='none' stroke='%23000' stroke-width='1.6' stroke-opacity='.2'/%3E%3Cg transform='matrix(1.0244 0 0 1.02415 -6.6 -281.9)'%3E%3Cpath d='M6.5 275.2v23.3a23.4 23.4 0 0 0 23.3-23.3z' fill='url(%23a)' paint-order='markers fill stroke'/%3E%3Cpath d='M29.1 275.2A31.9 32 0 0 1 6.5 298v.5a23.4 23.4 0 0 0 23.3-23.3z' fill='red' fill-opacity='.1' paint-order='markers fill stroke'/%3E%3Cg stroke='%23ff8400' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19.4 279.3v10l-4.3-2.6-4.3-2.4 4.3-2.5z' fill='%23fff' stroke-width='1.711052'/%3E%3Cpath d='M19.9 278.4V290l-5.1-2.9-5.1-3 5-2.9z' opacity='.5' fill='none' stroke-width='2.711856'/%3E%3C/g%3E%3Cellipse rx='1.8' ry='1.1' cy='281.2' cx='18.4' fill='%23fff' fill-opacity='.3' paint-order='markers fill stroke'/%3E%3Cellipse rx='1.8' ry='1.1' transform='rotate(-38.2)' cy='224.2' cx='-164.6' fill='%23fff' fill-opacity='.7' paint-order='markers fill stroke'/%3E%3Cellipse rx='2.5' transform='matrix(.79958 -.60056 -.43342 .90119 0 0)' ry='1.5' cy='531.1' cx='313.6' fill='%23fff' fill-opacity='.1' paint-order='markers fill stroke'/%3E%3C/g%3E%3Cpath d='M0 24.5A24 24 0 0 0 24.5 0' fill='none' stroke='%23fff' stroke-width='1.3'/%3E%3Cpath d='M0 23.5c12.5-.5 23-9 23.6-23.5' fill='none' stroke='%23f60' stroke-width='1.5'/%3E%3C/svg%3E");
+            animation: backButtonSlideIn 1s 2s ease-out forwards, backButtonFadeOut 10s linear;
+        }
+
+        @keyframes backButtonSlideIn {
+            from {
+                left: -20vw;
+            }
+
+            to {
+                left: 0;
+            }
+        }
+
+        #backButton:hover {
+            opacity: 1;
+        }
+
+        a {
+            color: cyan;
+            text-decoration: none;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .bg {
+            width: 100vw;
+            height: 100vh;
+            background-image: radial-gradient(darkSlateBlue, indigo, #220055);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: 'frivDevoryFont', sans-serif;
+        }
+
+        .cont {
+            position: relative;
+            width: 20vmax;
+            height: 10vmax;
+            overflow: hidden;
+            border-radius: 2vmax;
+            box-shadow: 0 0 2vmax black;
+            margin: 6vmax 0;
+        }
+
+        .button {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            background-color: purple;
+            position: relative;
+            border: 0.5vmax dashed orange;
+            border-radius: 2vmax;
+            outline: none;
+            transition: box-shadow 0.3s linear;
+            box-shadow: inset 0 0 1vmax black, inset 0 0 0 lime;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            box-shadow: inset 0 0 0 black, inset 0 0 15vmax lime;
+        }
+
+        .button:hover .blob {
+            animation: none;
+        }
+
+        .blob {
+            position: relative;
+            top: 10%;
+            left: 0%;
+            width: 10vmax;
+            height: 10vmax;
+            fill: orange;
+            transform-origin: 50% 50%;
+            filter: drop-shadow(0.2vmax 0.2vmax 0 rgba(0, 0, 0, .7));
+            animation: bump 5.5s ease infinite;
+        }
+
+        @keyframes bump {
+            0% {
+                transform: scale(1, 1) translateX(0);
+            }
+
+            9% {
+                transform: scale(1.1, 0.6) translateY(4vmax);
+            }
+
+            28% {
+                transform: scale(0.7, 1.3) translateY(-15vmax) translateX(10vmax);
+            }
+
+            35% {
+                transform: scale(1, 1) translateY(2vmax);
+            }
+
+            50% {
+                transform: scale(1, 1.1);
+            }
+
+            60% {
+                transform: scale(1.1, 0.8) translateY(4vmax);
+            }
+
+            80% {
+                transform: scale(0.7, 1.3) translateY(-10vmax) translateX(-5vmax);
+            }
+
+            88% {
+                transform: scale(1, 1) translateY(2vmax);
+            }
+
+            100% {
+                transform: scale(1, 1) translateX(0);
+            }
+        }
+
+        .line {
+            position: absolute;
+            bottom: 20%;
+            width: 25vmax;
+            height: 0.5vmax;
+            background: white;
+            transform: rotate(-8deg);
+            box-shadow: 0.2vmax 0.2vmax 0 rgba(0, 0, 0, .7);
+            animation: line 4s ease infinite reverse;
+        }
+
+        @keyframes line {
+            0% {
+                transform: rotate(-8deg);
+            }
+
+            9% {
+                transform: rotate(-8deg);
+            }
+
+            28% {
+                transform: rotate(28deg);
+            }
+
+            35% {
+                transform: rotate(20deg);
+            }
+
+            50% {
+                transform: rotate(10deg);
+            }
+
+            60% {
+                transform: rotate(-8deg);
+            }
+
+            80% {
+                transform: rotate(-12deg);
+            }
+
+            88% {
+                transform: rotate(-18deg);
+            }
+
+            100% {
+                transform: rotate(-8deg);
+            }
+        }
+
+        .text {
+            display: flex;
+            position: absolute;
+            top: 8%;
+            font-size: 6vmax;
+            text-shadow: 0.3vmax 0.3vmax rgba(0, 0, 0, .7);
+            font-family: 'frivDevoryFont', sans-serif;
+        }
+
+        p:nth-child(1n) {
+            transform: rotate(8deg);
+            animation: shake 0.5s ease infinite;
+            color: red;
+        }
+
+        p:nth-child(2n) {
+            transform: rotate(5deg);
+            animation: shake 0.5s ease-out infinite reverse;
+            color: yellow;
+        }
+
+        p:nth-child(3n) {
+            transform: rotate(-2deg);
+            animation: shake 0.5s 0.1s ease infinite;
+            color: lime;
+        }
+
+        p:nth-child(4n) {
+            color: cyan;
+        }
+
+        p:nth-child(5n) {
+            color: blue;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateX(0) rotate(8deg);
+            }
+
+            50% {
+                transform: translateX(1vmax) rotate(-3deg);
+            }
+
+            100% {
+                transform: translateX(0) rotate(6deg);
+            }
+        }
+
+        i {
+            color: #2867B2;
+            margin-top: 1vmax;
+        }
+
+        #gameFooterText {
+            text-shadow: 0 0 1vmax black;
+        }
+
+        #bottom {
+            font-size: medium;
+            background: rgba(0, 0, 0, .2);
+            color: rgba(255, 255, 255, .4);
+            position: fixed;
+            padding: 1.5vh;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .warn {
+            font-size: 2vmax;
+            color: red;
+        }
+
+    </style>
+
+</head>
+
+<body oncontextmenu="return false" ondragstart="return false">
+
+    <div id=backButton></div>
+
+    <div class='bg'>
+        <!-- xyz -->
+        <div class='cont'>
+            <div id=playButton class='button'>
+                <div class='blob'>
+                    <svg xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 310 350'>
+                        <path d='M156.4,339.5c31.8-2.5,59.4-26.8,80.2-48.5c28.3-29.5,40.5-47,56.1-85.1c14-34.3,20.7-75.6,2.3-111  c-18.1-34.8-55.7-58-90.4-72.3c-11.7-4.8-24.1-8.8-36.8-11.5l-0.9-0.9l-0.6,0.6c-27.7-5.8-56.6-6-82.4,3c-38.8,13.6-64,48.8-66.8,90.3c-3,43.9,17.8,88.3,33.7,128.8c5.3,13.5,10.4,27.1,14.9,40.9C77.5,309.9,111,343,156.4,339.5z' />
+
+                    </svg>
+                </div>
+                <div class='line'></div>
+                <div class='text'>
+                    <p>P</p>
+                    <p>L</p>
+                    <p>A</p>
+                    <p>Y</p>
+                    <p>!</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div id=gameFooterText>Sorry - there was an error with this game.</div>
+
+        <div id=bottom></div>
+
+    </div>
+
+
+
+    <script>
+        //browser language
+        var lang = navigator.language.toLowerCase();
+
+        if (false) {
+            lang = "en"; //spoof lang
+        }
+        var shortLang = lang.slice(0, 2);
+
+
+
+        //COOKIES
+        /////////
+
+        var pageViews = -1;
+        var gamePlays = -1;
+
+        //pageview
+        var n = localStorage.getItem('visitsCounter');
+        if (n === null) {
+            n = 0;
+        }
+        pageViews = n;
+        console.log("cookie pageviews: " + pageViews);
+
+        //gameplays
+        var x = localStorage.getItem('gamePlays');
+        if (x === null) {
+            x = 0;
+        }
+
+        gamePlays = x;
+
+        console.log("cookie gameplays: " + gamePlays);
+
+        setTimeout(function() {
+            gamePlays++;
+            localStorage.setItem("gamePlays", gamePlays);
+            console.log("cookie gameplays increment: " + gamePlays);
+        }, 100000); //100000 = 100 seconds of gameplay
+
+
+
+
+
+
+        //get device
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        userAgent = userAgent.toLowerCase();
+
+        var host = window.location.hostname;
+        var returnHost = host;
+
+        console.log("HOST: " + host);
+
+        if (gamePlays > 1 && gamePlays % 10 == 0) {
+            returnHost = "www.friv.com";
+        }
+
+        var siteIdentifier = "UNK";
+
+        switch (host) {
+            case "www.friv-2017.com":
+                siteIdentifier = "F17";
+                break;
+            case "www.friv.com":
+                siteIdentifier = "FDC";
+                break;
+            default:
+                // not used
+        }
+
+
+
+        var touchDevice = false;
+        var os = "Desktop";
+
+        if (/android/i.test(userAgent)) {
+            os = "Android";
+            touchDevice = true;
+        }
+
+        if (navigator.platform === 'iPad') {
+            os = "iPad";
+            touchDevice = true;
+        }
+
+        if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 0) {
+            os = "iPadNew";
+            touchDevice = true;
+        }
+
+        if (/iphone|ipod/.test(userAgent) && !window.MSStream) {
+            os = "iPhone";
+            touchDevice = true;
+        }
+
+        let gesture = "Click";
+
+        if (touchDevice) {
+            gesture = "Tap";
+        }
+
+        //get name and url data
+        var dataIn = location.href.split("?").pop().split(",");
+        //dataIn = dataIn.split(",");
+
+        var gameName = window.atob(dataIn[0]).replace(/-/g, " ");;
+
+        console.log(gameName);
+        console.log("---");
+
+        gameFooterText.innerHTML = gesture + " to play " + gameName.replace(/ /g, "&nbsp;");;
+
+        
+        ///////////////////
+        if (gameName == "Peanut Butter Jelly Time") {
+
+            switch (shortLang) {
+                case "es":
+                    gameFooterText.innerHTML = "Mire nuestro nuevo video corto de YouTube 5 veces y déle me gusta para apoyarnos. ¡Gracias!";
+                    break;
+                case "pt":
+                    gameFooterText.innerHTML = "Por favor, assista ao nosso novo vídeo curto no YouTube 5 vezes e curta-o para nos apoiar. Obrigado!";
+                    break;
+                case "id":
+                    gameFooterText.innerHTML = "Silakan tonton video pendek YouTube baru kami sebanyak 5 kali dan sukai untuk mendukung kami. Terima kasih!";
+                    break;
+                case "ph":
+                    gameFooterText.innerHTML = "Mangyaring panoorin ang aming bagong maikling video sa YouTube 5 beses at i-like ito upang suportahan kami. Salamat!";
+                    break;
+                case "tr":
+                    gameFooterText.innerHTML = "Bize destek olmak için lütfen yeni YouTube kısa videomuzu 5 kez izleyip beğenin. Teşekkür ederim!";
+                    break;
+                default:
+                    gameFooterText.innerHTML = "Please watch our new YouTube short video 5 times and like it to support us. Thank you!";
+            }
+        }
+        ///////////////////
+        
+
+        document.title = gameName;
+
+        var gameURL = dataIn[1];
+
+        console.log(gameURL);
+        console.log("---");
+
+        var ageWarning = "";
+
+        if (dataIn[2].indexOf("!pg") > -1) {
+            ageWarning = "<span class=warn>This game is rated PG-13.<br></span>";
+        }
+
+        bottom.innerHTML = ageWarning + "Some games are hosted externally. We are not responsible for the content and policies of other sites.";
+
+        //click out to play game
+        playButton.addEventListener('click', function(e) {
+            window.open("https://2dans.com/loader.html?" + dataIn, "_blank", "noreferrer"); //partner site
+
+            document.title = "Loading in new tab...";
+
+            setTimeout(function() {
+                document.title = host;
+            }, 5000); //10000 = 10 seconds
+
+        });
+
+        //back to main (user click)
+        backButton.addEventListener('click', function(e) {
+            window.open("https://" + returnHost + "/", "_self");
+        });
+
+        var sessionExpirySeconds = 200;
+
+        const cohort = "A"; //XMOD
+        
+        if (Math.random() > 0.01) { //1%
+            siteIdentifier = ""; //in most cases, simply blank site identifier
+        }
+
+        //back to main (auto, timed)
+        setTimeout(function() {
+            backButton.click();
+        }, sessionExpirySeconds * 1000); //200000 = a little over 3 mins
+
+        //prep game name before analytics
+        var gameNameStripped = gameName.replace(/ /g, "").replace(/!/g, "").replace(/'/g, "").replace(/ñ/g, "n").replace(/AndWatergirl/g, "").slice(0, 19);
+
+        if (dataIn[2].indexOf("!en") > -1) {
+            gameNameStripped += "-EN"
+        }
+
+        if (dataIn[2].indexOf("!nost") > -1) {
+            gameNameStripped += "-NOST"
+        }
+
+        if (dataIn[2].indexOf("!pg") > -1) {
+            gameNameStripped += "-PG"
+        }
+
+        if (dataIn[2].indexOf("!iext") > -1) {
+            gameNameStripped += "-IEXT"
+        }
+
+        //analytics
+
+        if (gamePlays % 10 == 0) {
+            gtag('event', (cohort + siteIdentifier + "|" + os + "|GamePlays|" + gamePlays));
+        }
+
+        gtag('event', (cohort + siteIdentifier + "|" + os + "|L|" + gameNameStripped)); //game loaded
+
+        setTimeout(function() {
+            gtag('event', (cohort + siteIdentifier + "|" + os + "|E|" + gameNameStripped)); //session expired
+        }, 180000);
+
+        var countdownSeconds = sessionExpirySeconds - 5;
+
+        setInterval(function() {
+
+            if (countdownSeconds < 11) {
+                bottom.style.color = "orange";
+                bottom.style.cursor = "default";
+                bottom.innerHTML = "Session expires in " + countdownSeconds + "s";
+            }
+
+            if (countdownSeconds < 0) {
+                bottom.innerHTML = "Session EXPIRED! Returning to home page...";
+            }
+
+            countdownSeconds--;
+
+        }, 1000);
+
+        //keypress test     
+        document.addEventListener("keypress", function(event) {
+            if (event.keyCode == 13) {
+                gamePlays++;
+                localStorage.setItem("gamePlays", gamePlays);
+                console.log("cookie gameplays increment: " + gamePlays);
+            }
+        });
+
+
+        // https://codepen.io/balazs-d/pen/OJRPZKz
+
+
+        //CONVERSIONS NEW
+        /////////////////
+
+        //setup...
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'AW-10805618303');
+
+        //event...
+        if (gamePlays == 0) { //new user
+            setTimeout(function() {
+                console.log("conv new");
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-10805618303/vc_CCJLRooIDEP_MwqAo'
+                });
+            }, 120000); //2 mins
+        }
+
+    </script>
+
+</body>
+
+</html>

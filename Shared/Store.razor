@@ -1,0 +1,94 @@
+﻿@inherits LayoutComponentBase
+@inject IJSRuntime JSRuntime
+
+<div class="layout-container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">E-Store</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto custom-nav-links">
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">Home</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="cart" Match="NavLinkMatch.All">Cart</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="about" Match="NavLinkMatch.All">About</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="contact" Match="NavLinkMatch.All">Contact</NavLink>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page content -->
+    <article class="content">
+        @Body
+    </article>
+
+    <footer class="footer py-3">
+        <div class="container text-center">
+            <p>&copy; 2024 E-Store. All rights reserved.</p>
+        </div>
+    </footer>
+</div>
+
+
+
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var links = document.querySelectorAll('.navbar-nav .nav-item .nav-link');
+
+        links.forEach(function (link) {
+            link.addEventListener('click', function () {
+                links.forEach(function (link) {
+                    link.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+    });
+</script>
+<style>
+
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar-nav .nav-link.active {
+        background-color: #343a40; /* Change this to the desired highlight color */
+        color: #fff; /* Change this to the desired text color */
+    }
+
+    .layout-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .content {
+        flex: 1;
+        background-color: #ffffff; /* Ensure the content area is white or desired color */
+        color: #343a40; /* Ensure text color contrast */
+        padding: 20px; /* Padding inside content area */
+    }
+
+    .footer {
+        background-color: #343a40;
+        padding: 10px 0; /* Adjusted padding to make the footer thinner */
+        color: #ffffff; /* Text color to match the theme */
+        text-align: center;
+        flex-shrink: 0;
+    }
+</style>
